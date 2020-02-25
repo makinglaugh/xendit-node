@@ -22,7 +22,7 @@ app.get('/trialinfo', function(req, res) {
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 function insertDate() {
- MongoClient.connect("mongodb://xendituser:JAo72aFNon&@__A!@xendit-mongo:27017/xenditdb", function (err, db) {
+ MongoClient.connect("mongodb://xendituser:XenDi7123@xendit-mongo:27017/xenditdb", function (err, db) {
      if(err) throw err;
  var dbo = db.db("xenditdb");
  dbo.collection('logging').insert({date: new Date(Date.now()).toISOString()}, function(err, r) {
