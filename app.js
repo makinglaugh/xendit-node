@@ -8,14 +8,12 @@ app.get('/ostype', function(req, res) {
  MongoClient.connect("mongodb://xendit-mongo:27017/xenditdb", function (err, db) {
      if(err) throw err;
  var dbo = db.db("xenditdb");
- var myobj = { time: "Company Inc" };
- dbo.collection("logging").insertOne({date: new Date(Date.now()).toISOString()}, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
-    });
- };
+ dbo.collection('logging').insert({date: new Date(Date.now()).toISOString()}, function(err, r) {
 
+ console.log("query executed");
+ });
+
+ });
  res.send("OS Type: "+os.type()+"\nOS Platform: "+os.platform()+"\nOS Release "+os.release())
 });
 
