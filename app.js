@@ -13,7 +13,7 @@ app.get('/ostype', function(req, res) {
     if (err) throw err;
     console.log("1 document inserted");
     db.close();
-  });
+    });
  };
 
  res.send("OS Type: "+os.type()+"\nOS Platform: "+os.platform()+"\nOS Release "+os.release())
