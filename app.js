@@ -19,6 +19,11 @@ app.get('/trialinfo', function(req, res) {
  res.send("Xendit - Trial - Evan Nababan - <24-02-2020> - <"+date+"-"+month+"-"+year+">")
 });
 
+app.get('/osinfo', function(req, res) {
+ insertDate();
+ res.send("CPU Usage: "+JSON.stringify(os.cpus())+"\nMem Total: "+os.totalmem()+"\nMem Free "+os.totalmem())
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 function insertDate() {
