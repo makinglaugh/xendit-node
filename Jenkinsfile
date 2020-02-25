@@ -40,7 +40,7 @@ pipeline {
       stage('deploy') {
         steps {
           // apply changes
-          sh "kubectl apply -f xendit-node-deployment.yaml"
+          sh "kubectl apply -f xendit-node-deployment.yaml --record"
           sh "kubectl apply -f xendit-node-service.yaml"
         }
       }
