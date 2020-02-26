@@ -20,7 +20,14 @@ pipeline {
       stage('kompose') {
         steps {
           // create deployment and service file
-          sh "kompose convert -f docker-compose.yaml"
+          sh "kompose convert -f docker-compose.yaml"  
+
+          // add line for check if new pods UP before replacing old ones
+          sh 'sed -i \'s/strategy: {}/strategy:/\' xendit-node-deployment.yaml'
+          sh "sed -i \'/template/i \\    type: RollingUpdate\' xendit-node-deployment.yaml"
+          sh "sed -i \'/template/i \\    rollingUpdate:\' xendit-node-deployment.yaml"
+          sh "sed -i \'/template/i \\      maxSurge: 1\' xendit-node-deployment.yaml"
+          sh "sed -i \'/template/i \\      maxUnavailable: 25%\' xendit-node-deployment.yaml"
 
           // add line for health check 
           sh "sed -i \'/resource/i \\        readinessProbe:\' xendit-node-deployment.yaml"
