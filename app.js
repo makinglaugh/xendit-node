@@ -21,7 +21,7 @@ app.get('/trialinfo', function(req, res) {
 
 app.get('/osinfo', function(req, res) {
  insertDate();
- res.send("CPU Usage: "+JSON.stringify(os.cpus())+"\nMem Total: "+os.totalmem()+"\nMem Free "+os.totalmem())
+ res.send("CPU Usage: "+JSON.stringify(os.cpus())+"\nMem Total: "+os.totalmem()+"\nMem Free "+os.freemem())
 });
 
 app.get('/health', function(req, res) {
