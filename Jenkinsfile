@@ -26,8 +26,8 @@ pipeline {
           sh 'sed -i \'s/strategy: {}/strategy:/\' xendit-node-deployment.yaml'
           sh "sed -i \'/template/i \\    type: RollingUpdate\' xendit-node-deployment.yaml"
           sh "sed -i \'/template/i \\    rollingUpdate:\' xendit-node-deployment.yaml"
-          sh "sed -i \'/template/i \\      maxSurge: 1\' xendit-node-deployment.yaml"
-          sh "sed -i \'/template/i \\      maxUnavailable: 25%\' xendit-node-deployment.yaml"
+          sh "sed -i \'/template/i \\      maxSurge: 2\' xendit-node-deployment.yaml"
+          sh "sed -i \'/template/i \\      maxUnavailable: 50%\' xendit-node-deployment.yaml"
 
           // add line for health check 
           sh "sed -i \'/resource/i \\        readinessProbe:\' xendit-node-deployment.yaml"
