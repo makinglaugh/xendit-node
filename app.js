@@ -24,6 +24,10 @@ app.get('/osinfo', function(req, res) {
  res.send("CPU Usage: "+JSON.stringify(os.cpus())+"\nMem Total: "+os.totalmem()+"\nMem Free "+os.totalmem())
 });
 
+app.get('/health', function(req, res) {
+ res.send("Health is OK !")
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 function insertDate() {
