@@ -19,9 +19,18 @@ pipeline {
       }
       stage('kompose') {
         steps {
-          echo " =========== ^^^^^^^^^^^^ Push Image "
           // create deployment and service file
           sh "kompose convert -f docker-compose.yaml"
+
+          // add line for health check 
+          sh "sed -i \'/resource/i \\        readinessProbe:\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\          httpGet:\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\            path: /health\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\            port: 3000\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\          initialDelaySeconds: 5\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\          periodSeconds: 5\' xendit-node.yaml"
+          sh "sed -i \'/resource/i \\          successThreshold: 1\' xendit-node.yaml"
+
           // kubernetes get credential
           sh "gcloud container clusters get-credentials xendit --zone asia-southeast1-a --project xendit-trial"
         }
